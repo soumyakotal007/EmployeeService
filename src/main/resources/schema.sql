@@ -1,0 +1,7 @@
+CREATE TABLE `employee` (
+  `id` INT NOT NULL,
+  `name` VARCHAR(50) NULL DEFAULT NULL,
+  `address` VARCHAR(50) NULL DEFAULT NULL,
+  `salary` DECIMAL(11,2) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
