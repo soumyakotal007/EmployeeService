@@ -8,16 +8,37 @@ group = 'com.employee'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
+apply plugin: 'eclipse'
+
 repositories {
 	mavenCentral()
+}
+
+ext {
+	set('springCloudVersion', "2021.0.3")
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+sourceSets {
+    main.java.srcDirs += "build/generated/sources/annotationProcessor/java/main"
 }
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.mapstruct:mapstruct:1.4.2.Final'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+    
+    implementation 'org.springframework.cloud:spring-cloud-config-client'
+    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+    
 	runtimeOnly 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
